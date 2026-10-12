@@ -1,0 +1,17 @@
+{
+  "addons": {
+    "custom-columns@anurag.zotero": {
+      "updates": [
+        {
+          "version": "1.1.0",
+          "update_link": "https://github.com/anurag/zotero-custom-columns/releases/download/v1.1.0/custom-columns-1.1.0.xpi",
+          "applications": {
+            "zotero": {
+              "strict_min_version": "7.0"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

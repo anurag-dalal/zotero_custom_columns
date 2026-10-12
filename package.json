@@ -1,0 +1,20 @@
+{
+  "name": "zotero-custom-columns",
+  "version": "1.1.0",
+  "description": "Zotero plugin: custom item-list columns (checkbox, rating, link, text, options) with color themes",
+  "private": true,
+  "type": "module",
+  "homepage": "https://github.com/anurag/zotero-custom-columns",
+  "scripts": {
+    "build": "node scripts/check.mjs && node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "dev": "node scripts/dev.mjs",
+    "dev:clean": "rm -rf .dev",
+    "clean": "rm -rf build",
+    "smoke": "node scripts/smoke-test.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT"
+}

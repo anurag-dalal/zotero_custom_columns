@@ -1,0 +1,328 @@
+/*
+ * Custom Columns — item tree cells and item pane section.
+ * Colors come from --cc-* variables injected per theme (see themes.js);
+ * a column may override its accent with --cc-col.
+ */
+
+.cc-cell {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 4px;
+	overflow: hidden;
+	--cc-c: var(--cc-col, var(--cc-accent));
+}
+
+/*
+ * Zotero centers ".cell.clickable" and drops its padding; clickable cells are
+ * used so clicks don't select the row. Restore normal alignment + padding.
+ */
+.virtualized-table .cell.cc-cell.clickable {
+	justify-content: flex-start;
+	padding: 0 8px;
+}
+
+/* ---- checkbox ---------------------------------------------------------- */
+
+.virtualized-table .cell.cc-type-checkbox.clickable,
+.cc-type-checkbox.cell {
+	justify-content: center;
+}
+
+.cc-box {
+	box-sizing: border-box;
+	display: inline-block;
+	position: relative;
+	flex: none;
+	width: 14px;
+	height: 14px;
+	border: 1.5px solid var(--cc-boxBorder);
+	border-radius: 3px;
+	cursor: pointer;
+	transition: background-color 80ms, border-color 80ms;
+}
+
+.cc-box:hover {
+	border-color: var(--cc-c);
+}
+
+.cc-box.cc-checked {
+	background: var(--cc-c);
+	border-color: var(--cc-c);
+}
+
+.cc-box.cc-checked::after {
+	content: "";
+	position: absolute;
+	left: 3.5px;
+	top: 0.5px;
+	width: 3.5px;
+	height: 7.5px;
+	border: solid var(--cc-checkMark);
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+}
+
+/* ---- rating ------------------------------------------------------------ */
+
+.cc-stars {
+	display: inline-flex;
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+	cursor: pointer;
+	line-height: 1;
+}
+
+.cc-star {
+	padding: 0 1px;
+	color: var(--cc-starEmpty);
+	transition: color 60ms, transform 60ms;
+}
+
+.cc-star.cc-on {
+	color: var(--cc-col, var(--cc-star));
+}
+
+/* Hovered star and every lower star (later siblings in the reversed row). */
+.cc-stars:hover .cc-star {
+	color: var(--cc-starEmpty);
+}
+
+.cc-stars .cc-star:hover,
+.cc-stars .cc-star:hover ~ .cc-star {
+	color: var(--cc-starHover);
+}
+
+.cc-stars .cc-star:hover {
+	transform: scale(1.2);
+}
+
+/* ---- link / text ------------------------------------------------------- */
+
+.cc-link {
+	color: var(--cc-col, var(--cc-link));
+	cursor: pointer;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	min-width: 0;
+}
+
+.cc-link:hover {
+	text-decoration: underline;
+}
+
+.cc-text {
+	color: var(--cc-col, var(--cc-text));
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	flex: 1;
+	min-width: 0;
+}
+
+.cc-link.cc-link {
+	flex: 0 1 auto;
+}
+
+.cc-placeholder {
+	color: var(--cc-muted);
+	opacity: 0;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+.row:hover .cc-placeholder {
+	opacity: 0.8;
+}
+
+.cc-edit {
+	margin-inline-start: auto;
+	flex: none;
+	color: var(--cc-muted);
+	cursor: pointer;
+	opacity: 0;
+	padding: 0 3px;
+	border-radius: 3px;
+}
+
+.row:hover .cc-edit {
+	opacity: 0.85;
+}
+
+.cc-edit:hover {
+	opacity: 1 !important;
+	background: color-mix(in srgb, currentColor 15%, transparent);
+}
+
+/* ---- option chips ------------------------------------------------------ */
+
+.cc-chip {
+	display: inline-block;
+	max-width: 100%;
+	box-sizing: border-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding: 0 7px;
+	line-height: 16px;
+	font-size: 0.92em;
+	border-radius: var(--cc-chip-radius, 999px);
+	border: 1px solid transparent;
+	cursor: pointer;
+}
+
+.cc-chip-soft {
+	background: color-mix(in srgb, var(--cc-opt) 22%, transparent);
+	color: color-mix(in srgb, var(--cc-opt) 70%, currentColor);
+}
+
+.cc-chip-solid {
+	background: var(--cc-opt);
+	color: var(--cc-opt-fg);
+}
+
+.cc-chip-outline {
+	border-color: var(--cc-opt);
+	color: color-mix(in srgb, var(--cc-opt) 75%, currentColor);
+}
+
+.cc-type-select.cell {
+	cursor: pointer;
+}
+
+/* ---- focused, selected rows: keep things legible on the selection color - */
+
+.virtualized-table:focus-within .row.selected .cc-link,
+.virtualized-table:focus-within .row.selected .cc-text,
+.virtualized-table:focus-within .row.selected .cc-edit,
+.virtualized-table:focus-within .row.selected .cc-placeholder {
+	color: inherit;
+}
+
+.virtualized-table:focus-within .row.selected .cc-star {
+	color: color-mix(in srgb, currentColor 35%, transparent);
+}
+
+.virtualized-table:focus-within .row.selected .cc-star.cc-on {
+	color: var(--cc-col, var(--cc-star));
+}
+
+.virtualized-table:focus-within .row.selected .cc-box {
+	border-color: currentColor;
+}
+
+.virtualized-table:focus-within .row.selected .cc-chip-soft {
+	background: color-mix(in srgb, var(--cc-opt) 55%, transparent);
+	color: inherit;
+}
+
+.virtualized-table:focus-within .row.selected .cc-chip-outline {
+	color: inherit;
+	border-color: currentColor;
+}
+
+/* ---- popup editor ------------------------------------------------------ */
+
+.cc-editor {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 10px;
+	width: 340px;
+}
+
+.cc-editor-title {
+	font-weight: 600;
+}
+
+.cc-editor-field {
+	font: inherit;
+	width: 100%;
+	box-sizing: border-box;
+	resize: vertical;
+}
+
+.cc-editor-footer {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.cc-editor-hint {
+	flex: 1;
+	opacity: 0.6;
+	font-size: 0.9em;
+}
+
+/* ---- item pane section ------------------------------------------------- */
+
+.cc-pane {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	align-items: center;
+	column-gap: 12px;
+	row-gap: 8px;
+	padding: 4px 0;
+}
+
+.cc-pane-label {
+	color: var(--fill-secondary, GrayText);
+	text-align: end;
+	max-width: 140px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.cc-pane-field {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 6px;
+	min-width: 0;
+	--cc-c: var(--cc-col, var(--cc-accent));
+}
+
+.cc-pane-field .cc-stars {
+	font-size: 1.15em;
+}
+
+.cc-pane-input {
+	flex: 1;
+	min-width: 0;
+	font: inherit;
+}
+
+.cc-pane-textarea {
+	resize: vertical;
+}
+
+.cc-pane-btn {
+	min-width: 0;
+	padding: 1px 8px;
+}
+
+.cc-pane-chip.cc-off {
+	opacity: 0.4;
+}
+
+.cc-pane-chip.cc-off:hover {
+	opacity: 0.75;
+}
+
+.cc-pane-muted {
+	color: var(--cc-muted);
+	font-size: 0.9em;
+}
+
+.cc-pane-empty {
+	grid-column: 1 / -1;
+	color: var(--cc-muted);
+}
+
+.cc-pane-link {
+	color: var(--cc-link);
+	cursor: pointer;
+	text-decoration: underline;
+}

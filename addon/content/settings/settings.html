@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html windowtype="customcolumns:settings">
+<head>
+	<meta charset="utf-8">
+	<title>Custom Columns</title>
+	<link rel="stylesheet" href="chrome://customcolumns/content/styles/cells.css">
+	<link rel="stylesheet" href="chrome://customcolumns/content/settings/settings.css">
+	<style id="cc-theme"></style>
+</head>
+<body>
+	<nav id="sidebar">
+		<div class="brand">
+			<img src="chrome://customcolumns/content/icons/icon.svg" alt="">
+			<span>Custom Columns</span>
+		</div>
+		<button class="tab" data-tab="columns">Columns</button>
+		<button class="tab" data-tab="templates">Templates</button>
+		<button class="tab" data-tab="appearance">Appearance</button>
+		<button class="tab" data-tab="data">Data</button>
+		<div class="spacer"></div>
+		<div id="status" aria-live="polite"></div>
+	</nav>
+	<main id="content"></main>
+	<script src="chrome://customcolumns/content/settings/settings.js"></script>
+</body>
+</html>

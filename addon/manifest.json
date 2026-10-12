@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "Custom Columns",
+  "version": "1.1.0",
+  "description": "Add your own item-tree columns to Zotero: checkboxes, ratings, links, text notes and option lists, with color themes.",
+  "author": "Anurag",
+  "homepage_url": "https://github.com/anurag/zotero-custom-columns",
+  "icons": {
+    "48": "content/icons/icon.svg",
+    "96": "content/icons/icon.svg"
+  },
+  "applications": {
+    "zotero": {
+      "id": "custom-columns@anurag.zotero",
+      "update_url": "https://raw.githubusercontent.com/anurag/zotero-custom-columns/main/update.json",
+      "strict_min_version": "7.0",
+      "strict_max_version": "10.*"
+    }
+  }
+}
